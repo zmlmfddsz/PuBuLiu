@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="initialize.css"/>
+    <style>
+        .content {
+            position: relative;
+            margin: auto;
+        }
+       .inner{
+           float: left;
+       }
+        .img {
+            border: 1px solid deeppink;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="content clearFix">
+    <div class="inner">
+        <div class="img"><img src="img/i1.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i2.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i3.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i4.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i5.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i6.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i7.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i8.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i9.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i10.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i11.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i12.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i13.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i14.jpg" alt=""/></div>
+    </div>
+    <div class="inner">
+        <div class="img"><img src="img/i15.jpg" alt=""/></div>
+    </div>
+</div>
+<script>
+   window.onload= function () {
+       function pbl(){
+           var content=document.getElementsByClassName("content").item(0);
+           var inner=document.getElementsByClassName("inner");
+           var num =Math.floor(document.documentElement.clientWidth/inner[0].offsetWidth);
+           content.style.width=num*inner[0].offsetWidth+"px";
+           var height=[];
+           for(var i=0;i<inner.length;i++){
+               if(i<num){
+                   height.push(inner[i].offsetHeight);
+                   inner[i].style.position="static";
+               }else{
+                   inner[i].style.position="absolute";
+                   var minHeight=Math.min.apply(null,height);
+                   var index=height.indexOf(minHeight);
+                   inner[i].style.top=minHeight+"px";
+                   inner[i].style.left=inner[index].offsetLeft+"px";
+                   height[index]+=inner[i].offsetHeight;
+               }
+           }
+       }
+       pbl();
+       var imaDate = {
+           "data": [
+               {"src": "i1.jpg"}, {"src": "i2.jpg"}, {"src": "i3.jpg"},
+               {"src": "i4.jpg"}, {"src": "i5.jpg"}, {"src": "i6.jpg"},
+               {"src": "i7.jpg"}, {"src": "i8.jpg"}, {"src": "i9.jpg"},
+               {"src": "i10.jpg"}, {"src": "i11.jpg"}, {"src": "i12.jpg"},
+               {"src": "i13.jpg"}, {"src": "i14.jpg"}, {"src": "i15.jpg"}
+           ]
+       };
+
+
+       window.onscroll= function () {
+           var content=document.getElementsByClassName("content").item(0);
+           var inner=document.getElementsByClassName("inner");
+           var h1=document.documentElement.scrollTop||document.body.scrollTop;
+           var h2=document.documentElement.clientHeight;
+           var h3=inner[inner.length-1].offsetTop;
+           if(h1+h2>h3){
+//               <div class="inner">
+//                   <div class="img"><img src="img/i15.jpg" alt=""/></div>
+//               </div>
+               for(var i=0;i<imaDate.data.length;i++){
+                   var img=document.createElement("img");
+                   img.src="img/"+imaDate.data[i].src;
+                   var div1=document.createElement("div");
+                   div1.className="img";
+                   div1.appendChild(img);
+                   var div2=document.createElement("div");
+                   div2.className="inner";
+                   div2.appendChild(div1);
+                   content.appendChild(div2);
+               }
+               pbl();
+           }
+       }
+
+      window.onresize= function () {
+          pbl();
+      }
+
+
+
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
